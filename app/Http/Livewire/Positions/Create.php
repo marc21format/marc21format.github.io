@@ -23,22 +23,13 @@ class Create extends Component
         $this->committees = Committee::orderBy('committee_name')->get();
     }
 
-    public function save()
+    public function toggleCommittee($committeeId)
     {
-        $this->validate();
-        $position = Position::create(['position_name' => mb_convert_case(trim($this->position_name), MB_CASE_TITLE, 'UTF-8')]);
-        if (! empty($this->committee_ids) && SchemaExists('committee_positions')) {
-            foreach ($this->committee_ids as $cid) {
-                DB::table('committee_positions')->insert([
-                    'position_id' => $position->position_id,
-                    'committee_id' => $cid,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+        if (in_array($committeeId, $this->committee_ids)) {
+            $this->committee_ids = array_diff($this->committee_ids, [$committeeId]);
+        } else {
+            $this->committee_ids[] = $committeeId;
         }
-        session()->flash('success', 'Position created');
-        return redirect()->route('positions.index');
     }
 
     public function render()

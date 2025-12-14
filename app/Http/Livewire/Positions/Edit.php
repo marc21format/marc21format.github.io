@@ -30,24 +30,14 @@ class Edit extends Component
         }
     }
 
-    public function save()
+    public function toggleCommittee($committeeId)
     {
-        $this->validate();
-        $pos = Position::findOrFail($this->position_id);
-        $pos->update(['position_name' => mb_convert_case(trim($this->position_name), MB_CASE_TITLE, 'UTF-8')]);
-        if (SchemaExists('committee_positions')) {
-            DB::table('committee_positions')->where('position_id', $this->position_id)->delete();
-            foreach ($this->committee_ids as $cid) {
-                DB::table('committee_positions')->insert([
-                    'position_id' => $this->position_id,
-                    'committee_id' => $cid,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+        if (in_array($committeeId, $this->committee_ids)) {
+            $this->committee_ids = array_diff($this->committee_ids, [$committeeId]);
+        } else {
+            $this->committee_ids[] = $committeeId;
         }
-        session()->flash('success', 'Position updated');
-        return redirect()->route('positions.index');
+    }
     }
 
     public function render()
