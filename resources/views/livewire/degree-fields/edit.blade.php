@@ -1,0 +1,32 @@
+<div class="profile-component-card">
+	<div class="profile-card-header">
+		<div>
+			<p class="profile-card-title">Edit Degree Field</p>
+		</div>
+		<div class="profile-card-actions">
+			<button type="button" class="gear-button text-slate-800" wire:click.prevent="save" title="Save">
+				<i class="fa fa-check" aria-hidden="true"></i>
+			</button>
+			<a href="{{ route('degree-fields.index') }}" class="gear-button text-slate-800" title="Cancel">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+
+	<div class="border-t border-slate-200 pt-4">
+		<form wire:submit.prevent="save">
+			@csrf
+
+			<div class="form-group">
+				<label for="field_name" class="form-label">Field name</label>
+				<input id="field_name" type="text" class="form-input" wire:model.defer="field_name" autocomplete="off" />
+				@error('field_name') <x-input-error>{{ $message }}</x-input-error> @enderror
+				<div class="mt-1 text-sm text-muted">
+					<small>Will auto-capitalize and auto-generate abbreviation</small>
+				</div>
+			</div>
+
+			{{-- actions moved to header --}}
+		</form>
+	</div>
+</div>

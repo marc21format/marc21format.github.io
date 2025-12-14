@@ -1,0 +1,43 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.logo img { 
+  width: 35px; 
+  height: 35px; 
+}
+
+.logo-text {
+  position: relative;
+  width: 200px;
+  height: 40px;
+}
+
+.logo-slide {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-weight: 700;
+  color: #1f1f1f;
+  line-height: 0.5;
+  white-space: pre-line;
+}
+
+.logo-slide.active { 
+  opacity: 1; 
+}
+
+.logo-slide:nth-child(2) { 
+  font-size: 0.6rem; 
+  line-height: 0.62; 
+}
+
+.light-text { 
+  font-weight: 500; 
+  display: block; 
+}

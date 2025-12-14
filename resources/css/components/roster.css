@@ -1,0 +1,619 @@
+/* =========================================================
+  STUDENTS ROSTER PAGE STYLES
+  ========================================================= */
+
+/*
+ Ensure the page has no default browser margin so roster pages
+ can span the full width. This is intentionally minimal and
+ targeted; it fixes the observed left/right page gaps when the
+ roster is rendered. If you'd prefer a narrower, site-wide
+ reset, move this rule to a global file (resources/css/app.css).
+*/
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Page Wrapper */
+.roster-page {
+  padding: 16px 0 24px;
+}
+
+/* Header */
+.roster-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.roster-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Tabs */
+.roster-tabs .nav-link {
+  font-weight: 600;
+  color: #399ee1;
+}
+.roster-tabs .nav-link.active {
+  background: #e8f4fd;
+  color: #2178c7;
+}
+
+/* =========================================================
+   SEARCH BAR + FILTERS
+   ========================================================= */
+
+/* Container */
+.search-section {
+  background: transparent;
+  padding: 0;
+}
+
+/* Search Input Group */
+.search-section .input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e6edf3;
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(16, 24, 40, 0.04);
+}
+
+/* Search Dropdown */
+.search-section .form-select {
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  min-width: 160px;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* Search Input */
+.search-section .form-control {
+  border: none;
+  background: transparent;
+  padding: 12px 12px;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+.search-section .form-control::placeholder {
+  color: #9ca3af;
+}
+
+/* Search Button */
+.search-section .btn-primary {
+  /* Force the search button to visually attach to the right side of the
+     input-group. Use a right-rounded rectangle so it matches the parent
+     rounded corner while avoiding being overridden by global .btn rules. */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 12px 12px 0 !important;
+  padding: 8px 20px !important;
+  margin-right: 0 !important;
+  box-shadow: none !important;
+  transition: background-color 0.16s ease-in-out, transform 0.08s ease !important;
+  min-height: 42px !important;
+}
+.search-section .btn-primary:hover {
+  background-color: #0056b3;
+}
+.search-section .btn-primary i {
+  margin-right: 6px;
+}
+
+/* Advanced Toggle */
+#advanced-toggle {
+  cursor: pointer;
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+}
+#advanced-toggle:hover {
+  color: #374151;
+  text-decoration: underline;
+}
+
+/* Add Student Link/Button */
+.search-section .add-student-link,
+.add-student-link {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 10px;
+  background: transparent;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+.search-section .add-student-link:hover,
+.add-student-link:hover {
+  color: #374151;
+  text-decoration: underline;
+  background: rgba(59, 65, 81, 0.03);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .search-section .input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .search-section .form-select,
+  .search-section .btn-primary {
+    width: 100%;
+  }
+}
+@media (max-width: 576px) {
+  .roster-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .roster-search .form-control {
+    min-width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* =========================================================
+   ADVANCED FILTERS
+   ========================================================= */
+
+#advanced-filters.card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.04);
+  padding: 1.5rem;
+}
+
+/* Field Consistency */
+#advanced-filters .form-control-modern,
+#advanced-filters .form-select.form-control-modern {
+  background: #fbfdff;
+  border: 1px solid #e6eef6;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #0f172a;
+  height: 42px;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+/* Collapsible filter sections */
+.filter-section {
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e9eef6;
+}
+.filter-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #7a808a; /* dark gray header */
+  color: #fff;
+  padding: 12px 18px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  min-height: 44px;
+}
+.filter-header:focus { outline: none; box-shadow: none; }
+.filter-body {
+  padding: 12px 16px 16px 16px;
+  background: #fff;
+  display: none;
+}
+.filter-body.show { display: block; }
+.filter-section .form-text.small { color: #6b7280; }
+
+#advanced-filters .filter-body .row > .filter-section {
+  flex: 1 1 100%;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make header consistently fill its container and keep its current flex layout */
+#advanced-filters .filter-section,
+#advanced-filters .filter-section .filter-header {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep the existing visual style but ensure header does not shrink when collapsed */
+#advanced-filters .filter-section .filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+/* Ensure selects with empty value show placeholder color */
+#advanced-filters .form-select option[value=""] {
+  color: #9ca3af;
+}
+
+/* Placeholder & Option Color Consistency (for all inputs, selects, and hints) */
+#advanced-filters input::placeholder,
+#advanced-filters select option[value=""],
+.search-section .form-control::placeholder,
+.search-section .form-select option[value=""],
+#advanced-filters .form-text.text-muted {
+  color: #a49999 !important;
+  opacity: 1;
+}
+
+/* Dropdowns default text color before a value is chosen */
+#advanced-filters .form-select.form-control-modern,
+.search-section .form-select {
+  color: #9ca3af;
+}
+
+/* Dropdowns and inputs with actual values — darker text */
+.form-select.has-value,
+#advanced-filters .form-select.form-control-modern.has-value,
+.search-section .form-select.has-value {
+  color: #0f172a !important;
+}
+
+
+/* Focus State */
+#advanced-filters .form-control-modern:focus,
+#advanced-filters .form-select.form-control-modern:focus {
+  background-color: #fff;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+  color: #0f172a;
+}
+
+/* Row & Column Layout */
+#advanced-filters .row {
+  gap: 1rem 1.25rem;
+}
+#advanced-filters .col-md-3,
+#advanced-filters .col-md-4 {
+  margin-bottom: 1rem;
+}
+
+/* Helper Text */
+#advanced-filters .form-text {
+  color: #6b7280;
+}
+
+/* Buttons */
+#advanced-filters .btn-primary {
+  border-radius: 999px;
+  padding: 8px 18px;
+  background-color: #0d6efd;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+#advanced-filters .btn-primary:hover {
+  background-color: #0056b3;
+}
+#advanced-filters .btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+#advanced-filters .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* =========================================================
+   TABLE + CARD
+   ========================================================= */
+
+.roster-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* convenience container to add spacing above roster blocks */
+.roster-wrapper {
+  margin-top: 1.25rem; /* 20px */
+  padding-top: 0.5rem;
+  /* remove horizontal margins/padding so roster stretches full width */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* shorthand alias: 'acrd' (atomic card) — reuse roster-card visuals */
+.acrd,
+.card-acrd {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+/* add a sensible top spacing when used directly on cards */
+.roster-card, .acrd, .card-acrd { margin-top: 1rem; width: 100%; }
+
+.roster-card .table thead th {
+  background: #1f2937;
+  color: #fff;
+  font-weight: 700;
+  border-color: #1f2937;
+}
+.roster-card .table td,
+.roster-card .table th {
+  vertical-align: middle;
+}
+.roster-card .table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+.roster-card .table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+/* =========================================================
+   MISC ELEMENTS
+   ========================================================= */
+
+/* Hero */
+.page-hero {
+  text-align: center;
+  margin: 16px 0 20px;
+}
+.page-hero h1 {
+  font-weight: 800;
+  font-size: 3rem;
+  margin-bottom: 0.25rem;
+}
+.page-hero .subtitle {
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+
+/* Toolbar */
+.roster-toolbar {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 280px 1fr 120px;
+  gap: 12px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .roster-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+.roster-toolbar .form-control {
+  border-radius: 10px;
+}
+
+
+/* Make groups visually match roster filter sections */
+.group { border: 1px solid #e9eef6; border-radius: 8px; padding: 12px; background: #fff; }
+.group .filter-section { margin-bottom: 0; }
+.group .group-operator { min-width: 110px; }
+/* Add Button */
+.add-btn-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.25);
+  text-decoration: none;
+  transition: background 0.2s ease-in-out;
+}
+.add-btn:hover {
+  background: #16a34a;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* =========================================================
+   ADVANCED SEARCH BUILDER - INPUT & CLICKABLE TEXT STYLES
+   ========================================================= */
+
+/* Inputs and selects inside the builder should have a soft rounded
+   card-like appearance matching the screenshot. */
+#search-builder .condition-row input.form-control,
+#search-builder .condition-row .form-select,
+#search-builder .card .form-control,
+#search-builder .card .form-select,
+#search-builder .form-control,
+#search-builder .form-select,
+.group .form-control,
+.group .form-select {
+  background: #fbfdff;
+  border: 1px solid #e6eef6;
+  border-radius: 8px;
+  padding: 8px 12px;
+  height: 40px;
+  box-shadow: inset 0 1px 2px rgba(16,24,40,0.03);
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+#search-builder .condition-row input.form-control::placeholder {
+  color: #9ca3af;
+}
+
+/* Ensure any .flex-fill children in condition rows grow to fill available space */
+#search-builder .condition-row .flex-fill {
+  flex: 1 1 auto;
+  min-width: 0; /* prevent overflow from forcing layout issues */
+}
+
+/* make condition-row children visible and give a min-height so empty-looking rows are clear */
+#search-builder .condition-row {
+  align-items: center;
+  min-height: 40px;
+}
+#search-builder .condition-row > * {
+  min-width: 0;
+}
+
+/* Tighter spacing for the small variant already used in templates */
+#search-builder .condition-row .form-select.form-select-sm,
+#search-builder .condition-row input.form-control-sm {
+  padding: 6px 10px;
+  height: 36px;
+}
+
+/* Make each search group visually a card with soft border and spacing */
+#search-builder .group {
+  border: 1px solid #e9eef6;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.03);
+}
+
+#search-builder .group strong {
+  font-size: 1rem;
+  color: #111827;
+}
+
+/* Clickable text-style buttons: Add / Remove links */
+.add-condition-btn,
+/* Add-condition: plain underlined link (left aligned in footer) */
+.add-condition-btn,
+.add-condition-btn.btn,
+.add-condition-btn.btn-outline-primary {
+  background: transparent !important;
+  border: none !important;
+  color: #0d6efd !important;
+  padding: 0 !important;
+  height: auto !important;
+  box-shadow: none !important;
+  font-weight: 600;
+  text-decoration: underline !important;
+  display: inline-block;
+}
+.add-condition-btn:hover { color: #0b5ed7 !important; text-decoration: underline !important; }
+
+/* Remove group / remove condition appear as red text links with X */
+.remove-group-btn,
+.remove-condition-btn,
+.remove-group-btn.btn,
+.remove-condition-btn.btn {
+  background: transparent !important;
+  border: none !important;
+  color: #b91c1c !important;
+  padding: 0 !important;
+  height: auto !important;
+  box-shadow: none !important;
+  font-weight: 600;
+  text-decoration: underline !important;
+  display: inline-block;
+}
+.remove-group-btn:hover, .remove-condition-btn:hover { color: #991b1b !important; text-decoration: underline !important; }
+
+/* Small remove icon-style button (when template uses the small btn) */
+.remove-condition-btn.small, .remove-condition-btn.btn-sm { padding: 2px 6px !important; }
+
+/* Primary Find button should be prominent and consistent */
+#search-builder button[type="submit"].btn-primary {
+  border-radius: 8px;
+  padding: 8px 18px;
+  box-shadow: 0 8px 18px rgba(13,110,253,0.12);
+}
+
+/* JSON output box style */
+#search-json-output {
+  border: 1px solid #eef2f6;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+/* Make the operator select visually in-line and match inputs */
+.group-operator {
+  border: 1px solid #e6eef6;
+  border-radius: 8px;
+  padding: 6px 10px;
+  height: 36px;
+  background: #fbfdff;
+}
+
+@media (max-width: 576px) {
+  #search-builder .condition-row { flex-direction: column; align-items: stretch; }
+  #search-builder .condition-row .form-select,
+  #search-builder .condition-row input.form-control { width: 100%; }
+}
+
+/* Group footer: keep Add condition left and Remove Group right */
+.group .group-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.group .group-footer .ms-auto { margin-left: auto !important; }
+
+/* Make remove-condition use smaller padding so it doesn't push layout */
+.remove-condition-btn { padding: 6px 8px !important; }
+.remove-group-btn { padding: 6px 8px !important; }
+
+/* Pagination */
+.pager-pill {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+.pager-pill .pill {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+/* Hoverable Link */
+.hover-link {
+  transition: color 0.2s ease-in-out;
+}
+.hover-link:hover {
+  color: #0d6efd !important;
+  text-decoration: underline;
+}
+
+/* Field Focus Reset */
+.search-section .form-control:focus,
+.search-section .form-select:focus {
+  box-shadow: none;
+  outline: none;
+  background-color: #f8f9fa;
+}
+
+/* Lighter placeholder for select blank option */
+.form-select option[value=""] {
+  color: #9ca3af;
+}

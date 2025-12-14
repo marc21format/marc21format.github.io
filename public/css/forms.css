@@ -1,0 +1,185 @@
+/* Reusable form styles for FCEER — modern, rounded, gray placeholders, consistent spacing */
+:root{
+  --form-bg: #ffffff;
+  --form-border: #d0d0d0;
+  --form-input-bg: #ffffff;
+  --form-radius: 12px;
+  --form-padding-vertical: 0.65rem;
+  --form-padding-horizontal: 0.85rem;
+  --placeholder: #9b9b9b;
+  --label-color: #2e2e2e;
+  --header-color: #2e2e2e;
+  --primary: #3d7bff;
+  --primary-hover: #2f63e6;
+  --secondary-bg: #f3f4f6;
+}
+
+/* Card wrapper */
+.form-card{
+  background: rgb(199, 201, 206);
+  border: 1px solid var(--form-border);
+  border-radius: calc(var(--form-radius) + 2px);
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+}
+
+.form-header{
+  font-weight: 600;
+  color: var(--header-color);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.form-group{
+  margin-bottom: 20px;
+}
+
+.form-label{
+  display: block;
+  color: #111827;
+  font-size: 0.95rem;
+  color: var(--label-color);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* Inputs and selects uniform styling */
+.form-input,
+.form-select,
+.form-textarea{
+  width: 100%;
+  display: block;
+  padding: var(--form-padding-vertical) var(--form-padding-horizontal);
+  border-radius: var(--form-radius);
+  border: 1px solid var(--form-border);
+  background: var(--form-input-bg);
+  font-size: 0.95rem;
+  color: #111827;
+  outline: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder{
+  color: var(--placeholder);
+}
+
+/* Select placeholder fix */
+.form-select option[disabled][selected] {
+  color: var(--placeholder);
+}
+
+/* Focus state */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+  border-color: #4a8bff;
+  box-shadow: 0 0 0 6px rgba(74,139,255,0.08);
+}
+
+/* Modern custom select arrow */
+.form-select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9b9b9b 50%),
+    linear-gradient(135deg, #9b9b9b 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.3rem;
+  height: 44px;
+  line-height: 1.4;
+}
+
+/* Ensure select stays rounded even if other CSS forces override */
+select.form-select {
+  border-radius: var(--form-radius) !important;
+}
+
+/* Stronger specificity to prevent third-party CSS (Bootstrap) from overriding select appearance */
+select.form-select, .form-select {
+  border-radius: var(--form-radius) !important;
+  border: 1px solid var(--form-border) !important;
+  background: var(--form-input-bg) !important;
+  padding: var(--form-padding-vertical) var(--form-padding-horizontal) !important;
+  padding-right: 2.3rem !important;
+  height: 44px !important;
+  box-shadow: none !important;
+}
+
+/* Layout rows & columns */
+.form-row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.form-col{ flex:1; }
+
+.form-actions{
+  margin-top:24px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius: 8px;
+  font-weight:600;
+  border:1px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.btn-primary{
+  background: var(--primary);
+  color:#fff;
+}
+.btn-primary:hover{
+  background: var(--primary-hover);
+}
+
+.btn-secondary{
+  background: var(--secondary-bg);
+  color:#111827;
+  border:1px solid var(--form-border);
+}
+
+.btn-danger{
+  background:#fff;
+  color:#dc2626;
+  border:1px solid #fca5a5;
+}
+
+.small-link{
+  font-size:0.95rem;
+  color:var(--primary);
+  text-decoration:none;
+}
+.small-link:hover{
+  text-decoration:underline;
+  color:var(--primary-hover);
+}
+
+/* Table */
+.form-table{
+  width:100%;
+  border-collapse:collapse;
+}
+.form-table th,
+.form-table td{
+  padding:10px 12px;
+  border-bottom:1px solid var(--form-border);
+  text-align:left;
+}
+
+/* Responsive */
+@media (max-width:640px){
+  .form-row{ flex-direction:column; }
+}

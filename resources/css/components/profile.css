@@ -1,0 +1,1049 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #f8fafc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+    --profile-bg: #ffffff;
+    --profile-border: #e6e9ee;
+    --profile-accent: #4a8bff;
+    --profile-title: #0f172a;
+    --profile-muted: #6b7280;
+    --profile-card-shadow: 0 12px 24px rgba(15,23,42,0.08);
+    --profile-card-inner-shadow: 0 1px 2px rgba(15,23,42,0.08);
+    --profile-font: 'Inter', 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.profile-page{
+    padding: 0 2rem 3rem;
+    background: transparent;
+    font-family: var(--profile-font);
+    color: var(--profile-title);
+}
+
+/* Layout helpers: allow main to grow so footer remains at bottom */
+main { flex: 1; }
+
+footer {
+    padding: 1.25rem 0;
+    text-align: center;
+    color: #475569;
+    background: transparent;
+    font-size: 0.95rem;
+}
+
+.profile-grid-wrapper{
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.profile-grid-wrapper .grid{
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* Profile section "tab" */
+.profile-section{
+    background: var(--profile-bg);
+    border: 1px solid var(--profile-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+    padding: 0; /* header/content control inner spacing */
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.profile-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.95));
+    border-bottom: 1px solid var(--profile-border);
+}
+
+.profile-title{
+    margin-left: 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--profile-title);
+}
+
+.profile-actions{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.profile-aside-card {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.profile-page aside,
+.profile-grid-wrapper aside {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+.profile-main-card{
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.profile-component-card{
+    border: 1px solid var(--profile-border);
+    border-radius: 14px;
+    background: var(--profile-bg);
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.05);
+    margin-top: 1.25rem;
+    font-family: inherit;
+     /* Fill the parent column width (max 900px) so cards align with the main content column
+         Instead of centering globally, let the parent layout control horizontal placement. */
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+/* Modifier class to make a card occupy a consistent centered size and fill space
+   Apply `.fill` only where you want cards to have fixed sizing (create/edit pages)
+   so the main profile/show pages remain flexible. */
+.profile-component-card.fill {
+    /* Fill modifier: keep the same horizontal sizing but a smaller vertical presence to avoid wasted space */
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-component-card + .profile-component-card{
+    margin-top: 1rem;
+}
+
+.profile-card-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:1rem;
+    padding-bottom:0.8rem;
+    border-bottom:1px solid #eef2f6;
+}
+
+.profile-card-meta{
+    font-size:0.7rem;
+    letter-spacing:0.4em;
+    text-transform:uppercase;
+    color:var(--profile-muted);
+}
+
+.profile-card-title{
+    margin:0;
+    font-size:1.15rem;
+    font-weight:600;
+    color:var(--profile-title);
+    line-height:1.4;
+}
+
+.profile-card-subtitle{
+    margin:0;
+    font-size:0.75rem;
+    /* reduced letter-spacing so subtitles don't appear spaced-out */
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--profile-muted);
+}
+
+.profile-card-actions{
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+}
+
+.gear-button{
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    padding: 0.25rem;
+    background-color: transparent;
+    color: #9ca3af;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+.gear-button:hover{
+    color: #6b7280;
+}
+.gear-button i{      
+    color: inherit;
+    font-size: 1.1rem;
+}
+
+.profile-nav-column{
+    display:flex;
+    flex-direction:column;
+    gap:0.25rem;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+.profile-nav-column .profile-nav-item{
+    width:100%;
+    text-align:center;
+    display:block;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    background: transparent;
+    border: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+.profile-nav-column .profile-nav-item:hover{
+    color: #1e293b;
+    background: rgba(0,0,0,0.02);
+}
+.profile-nav-column .profile-nav-item.active,
+.profile-nav-column .profile-nav-item:focus{
+    background: transparent;
+    color: #0f172a;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+/* Sidebar positioning - not sticky to avoid covering navbar */
+.profile-aside-card{
+    position: static;
+    z-index: auto;
+    align-self: flex-start;
+}
+
+.profile-section,
+.profile-component-card{
+    font-family: var(--profile-font);
+}
+
+.profile-component-card table{
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+/* Make the card body expand to fill the card so short forms still occupy consistent space */
+.profile-component-card.fill > .border-t,
+.profile-component-card.fill > .profile-content,
+.profile-component-card.fill > form {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-component-card.fill form .form-group {
+    /* ensure groups don't force the card to grow beyond min-height */
+    flex: 0 0 auto;
+}
+
+.profile-component-card.fill form .form-actions {
+    /* push actions to bottom when forms are shorter */
+    margin-top: auto;
+}
+
+.profile-component-card th,
+.profile-component-card td{
+    padding: 0.65rem 0.9rem !important;
+    border: none;
+    vertical-align: middle;
+}
+
+.profile-component-card th{
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--profile-muted);
+}
+
+.profile-component-card tbody tr{
+    background: rgba(15,23,42,0.02);
+}
+
+.profile-component-card tbody tr:nth-child(even){
+    background: rgba(15,23,42,0.04);
+}
+
+.profile-component-card .profile-link{
+    color: var(--profile-accent);
+    font-weight: 500;
+}
+.profile-content{
+    padding: 1rem 1.25rem;
+}
+
+/* Summary blocks inside profile-content (personal/account info) */
+.profile-summary{
+    padding: 0; /* parent .profile-content provides spacing */
+    margin: 0 0 0.25rem 0;
+}
+
+/* Reusable profile table for lists used across profile pages */
+.profile-table{
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    font-size: 0.95rem;
+}
+.profile-table th{
+    text-align: left;
+    font-weight: 600;
+    color: var(--profile-muted);
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid #eef2f6;
+    vertical-align: bottom;
+}
+.profile-table td{
+    padding: 0.6rem 0.75rem;
+    color: #111827;
+    border-bottom: 1px solid #f8fafc;
+}
+
+/* Subtle row striping for readability */
+.profile-table tbody tr:nth-child(odd){
+    background: rgba(15,23,42,0.02);
+}
+
+/* Compact summary table where th is narrower */
+.profile-summary-table th{
+    width: 200px;
+    font-weight: 600;
+    color: var(--profile-muted);
+}
+
+/* Make links match profile accent */
+.profile-table a.profile-link{
+    color: var(--profile-accent);
+    font-weight: 500;
+}
+
+
+/* Keep tables visually consistent but remove extra actions column when desired */
+.profile-content table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-content th, .profile-content td{
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.profile-content tbody tr:last-child td{
+    border-bottom: none;
+}
+
+.profile-link{
+    color: var(--profile-accent);
+    text-decoration: none;
+}
+.profile-link:hover{
+    text-decoration: underline;
+}
+
+/* Utility: visually hide elements that still exist in markup but should not show */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+/* Attendance view styles (cards, table and sidebar) - matches profile styling */
+.attendance-page{
+    padding: 0 2rem 3rem;
+    background: transparent;
+    font-family: 'Inter', 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: #0f172a;
+}
+.attendance-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:1.25rem;
+    max-width:1200px;
+    margin:0 auto 2rem;
+    padding:0;
+}
+.attendance-main{display:flex;flex-direction:column;gap:1rem}
+.attendance-title-row{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:0.5rem}
+.attendance-title-preview{display:flex;flex-direction:column;gap:0.15rem}
+.attendance-title-row h1{margin:0;font-size:1.5rem;font-weight:600;color:#0f172a}
+.attendance-preview-text{font-weight:500;font-size:0.875rem;color:#6b7280;text-align:left;margin:0}
+.attendance-side{display:none}
+.attendance-card{
+    background:#fff;
+    border:1px solid #e6e9ee;
+    border-radius:14px;
+    padding:1.25rem;
+    box-shadow:0 2px 6px rgba(15,23,42,0.05);
+}
+.attendance-filters .filters-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0,1fr)) auto;
+    gap:1rem;
+    align-items:end;
+}
+.filter-field{display:flex;flex-direction:column;gap:0.35rem;width:100%}
+.filter-actions{justify-self:end}
+.filter-actions .btn-apply{width:auto;min-width:100px}
+.attendance-header-controls{display:flex;justify-content:flex-end;gap:0.5rem}
+.label{display:block;font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;margin-bottom:4px}
+.form-input,.form-select{
+    width:100%;
+    padding:0.6rem 0.75rem;
+    border:1px solid #e6e9ee;
+    border-radius:8px;
+    background:#fafbfc;
+    font-size:0.875rem;
+    color:#0f172a;
+    transition:border-color 0.15s ease;
+}
+.form-input:focus,.form-select:focus{
+    outline:none;
+    border-color:#94a3b8;
+}
+.btn-apply{
+    background:#475569;
+    color:#fff;
+    border:none;
+    padding:0.6rem 1.25rem;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.875rem;
+    cursor:pointer;
+    transition:background 0.15s ease;
+}
+.btn-apply:hover{background:#334155}
+.btn-plain{
+    background:transparent;
+    border:none;
+    color:#64748b;
+    font-weight:500;
+    font-size:0.875rem;
+    cursor:pointer;
+    padding:0.5rem 0.75rem;
+    border-radius:6px;
+    transition:color 0.15s ease, background 0.15s ease;
+}
+.btn-plain:hover{color:#1e293b;background:rgba(71,85,105,0.08)}
+.attendance-table-wrapper{overflow:auto}
+.attendance-table{width:100%;border-collapse:collapse}
+.attendance-table th{
+    font-weight:600;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:0.75rem 1rem;
+    text-align:left;
+    border-bottom:1px solid #eef2f6;
+    color:#6b7280;
+}
+.attendance-table th.center{text-align:center}
+.attendance-table td{padding:0.85rem 1rem;border-bottom:1px solid #f3f6f9;vertical-align:middle}
+.attendance-table td.center{text-align:center}
+.attendance-table .muted{color:#94a3b8;font-weight:500;font-size:0.875rem}
+.attendance-table .name{font-weight:500;color:#0f172a}
+.student-name-group{display:flex;flex-direction:column;gap:0.15rem}
+.student-name-main{font-weight:600;font-size:0.95rem;color:#0f172a}
+.student-group-subtext{font-size:0.8rem;color:#94a3b8;font-weight:400}
+.attendance-radio{display:inline-block;width:20px;height:20px;border-radius:9999px;border:2px solid #d1d5db;background:#fff}
+.attendance-radio.absent{border-color:#d1d5db}
+.attendance-radio.leave{border-color:#fbbf24}
+.attendance-radio.checked{background-clip:padding-box;position:relative}
+.attendance-radio.checked.present::after{content:'';position:absolute;left:3px;top:3px;width:10px;height:10px;background:#10b981;border-radius:9999px}
+.attendance-radio.checked.absent::after{content:'';position:absolute;left:3px;top:3px;width:10px;height:10px;background:#94a3b8;border-radius:9999px}
+.attendance-radio.checked.leave::after{content:'';position:absolute;left:3px;top:3px;width:10px;height:10px;background:#fbbf24;border-radius:9999px}
+
+.mini-calendar .calendar-header{font-weight:600;margin-bottom:0.75rem}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.calendar-day{font-size:0.7rem;letter-spacing:0.05em;color:#94a3b8;text-align:center;padding:0.25rem 0}
+.calendar-cell{
+    height:32px;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#64748b;
+    font-size:0.85rem;
+    font-weight:500;
+    cursor:pointer;
+    transition:background 0.15s ease;
+}
+.calendar-cell:hover{background:#f1f5f9}
+.calendar-cell.today{background:#10b981;color:#fff}
+.calendar-cell.today:hover{background:#059669}
+.calendar-month-label{margin-top:0.75rem;font-size:0.875rem;color:#64748b;font-weight:500;text-align:right}
+
+.stat-card{display:flex;flex-direction:column;padding:1rem 1.25rem;border-radius:10px;color:#0f172a;border:none}
+.stat-card .stat-number{font-size:1.5rem;font-weight:700}
+.stat-card .stat-label{font-size:0.85rem;color:#475569;margin-top:4px;font-weight:500}
+.stat-card.yellow{background:#fef9c3;border-left:4px solid #eab308}
+.stat-card.green{background:#dcfce7;border-left:4px solid #22c55e}
+.stat-card.red{background:#fee2e2;border-left:4px solid #ef4444}
+
+@media (max-width: 900px){
+    .attendance-page{padding:0 1rem 2rem}
+    .attendance-filters .filters-grid{grid-template-columns:1fr 1fr;gap:0.75rem}
+    .filter-actions{grid-column:span 2;justify-self:stretch}
+    .filter-actions .btn-apply{width:100%}
+}
+
+.calendar-section{display:flex;flex-direction:column;gap:1rem}
+.calendar-card{padding:1rem}
+.stats-row{display:flex;flex-direction:column;gap:0.75rem}
+.attendance-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(260px,320px);
+    gap:1.25rem;
+    align-items:start;
+}
+.attendance-column{display:flex;flex-direction:column;gap:1rem}
+.calendar-column .calendar-section{gap:1rem}
+.monthly-matrix-card{margin-top:1rem}
+.monthly-matrix-card-header{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:12px}
+.matrix-nav{min-width:32px;padding:0.25rem 0.5rem;font-size:1rem}
+.monthly-header-text{font-weight:600;color:#0f172a;font-size:1rem}
+.monthly-member-cell{display:flex;flex-direction:column;gap:0.2rem}
+.monthly-member-name{font-weight:600;font-size:0.95rem;color:#0f172a}
+.monthly-member-roles{display:flex;flex-direction:column;gap:0.1rem;margin:0}
+.monthly-member-role{line-height:1.3;font-weight:400;font-size:0.8rem;color:#94a3b8}
+
+/* ========================================
+   PROFILE FORMS STYLING
+   Modern, clean form styling for create/edit
+   ======================================== */
+
+/* Form containers */
+.profile-form-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    font-family: var(--profile-font);
+}
+
+/* Form groups */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Form labels */
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+/* Form inputs and selects - matching the modern design */
+.form-input,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #0f172a;
+    transition: all 0.15s ease;
+    font-family: var(--profile-font);
+}
+
+/* Placeholder visual for selects: when select has no value, show muted color */
+.form-select.placeholder-empty {
+    color: #94a3b8;
+}
+.form-select:not(.placeholder-empty) {
+    color: #0f172a;
+}
+
+.form-input:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #94a3b8;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
+}
+
+.form-input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+/* Textarea specific */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Modern textarea variant to match inputs */
+.form-textarea {
+    min-height: 120px;
+    padding: 0.75rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 0.95rem;
+    color: #0f172a;
+    transition: all 0.15s ease;
+}
+.form-textarea:focus {
+    outline: none;
+    border-color: #94a3b8;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.06);
+}
+
+/* Select dropdown styling */
+.form-select,
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+}
+
+/* Checkbox and radio inputs */
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/* Form row grid (for side-by-side fields) */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.form-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form actions (buttons) */
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: none;
+    font-family: var(--profile-font);
+}
+
+.btn-primary {
+    background: #475569;
+    color: #ffffff;
+    border: 1px solid #475569;
+}
+
+.btn-primary:hover {
+    background: #334155;
+    border-color: #334155;
+}
+
+.btn-outline {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-outline:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+.btn-danger {
+    background: #ffffff;
+    color: #ef4444;
+    border: 1px solid #fecaca;
+}
+
+.btn-danger:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #64748b;
+    border: none;
+    padding: 0.5rem;
+}
+
+.btn-ghost:hover {
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.btn-sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+}
+
+/* Small links */
+.small-link {
+    font-size: 0.875rem;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.small-link:hover {
+    color: #1e293b;
+    text-decoration: underline;
+}
+
+/* Error messages */
+.text-red-500 {
+    color: #ef4444;
+}
+
+x-input-error,
+.input-error {
+    display: block;
+    font-size: 0.8125rem;
+    color: #ef4444;
+    margin-top: 0.375rem;
+}
+
+/* Profile info field display (for show/index pages) */
+.profile-info-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.profile-info-field-label {
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #64748b;
+}
+
+.profile-info-field-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Profile field grid (2 column layout) */
+.profile-field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .profile-field-grid,
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Profile records grid (card-based display) */
+.profile-records-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .profile-records-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-record-card {
+    display: block;
+    padding: 0.875rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+
+.profile-record-card:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.06);
+}
+
+.profile-record-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.25rem;
+}
+
+.profile-record-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+}
+
+/* Small avatar utility used in roster rows */
+.avatar-sm{
+    /* increased by ~50% from 32px -> 48px for clearer visibility in roster */
+    width:48px;
+    height:48px;
+    font-size:1rem;
+    line-height:48px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9999px;
+    background:#e6eef8;
+    color:var(--profile-title);
+}
+
+/* Generic bordered list row for volunteers / courses inside a university container
+   Matches roster appearance: plain white row, subtle border, no heavy shadow */
+.list-row{
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 8px;
+    padding: 0.75rem;
+    display:flex;
+    align-items:center;
+    gap:0.75rem;
+}
+
+.list-row + .list-row{ /* vertical spacing between rows */
+    margin-top:0.6rem;
+}
+
+.list-row .name{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--profile-title);
+}
+
+.list-row .subtitle-muted{
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Course row specifics */
+.course-row{
+    background:#ffffff;
+    border:1px solid #eef2f6;
+    border-radius:8px;
+    padding:0.75rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* Volunteer count badge (right-aligned small oblong) */
+.vol-badge{
+    display:inline-block;
+    padding:0.2rem 0.6rem;
+    background:#f8fafc;
+    border:1px solid #eef2f6;
+    border-radius:9999px;
+    color:#6b7280;
+    font-size:0.75rem;
+    font-weight:600;
+}
+
+/* helper to reduce outer shadow if you want exact roster parity */
+.no-top-shadow{box-shadow:none !important}
+
+.profile-record-meta {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* Enhanced table styling for profile tables */
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    font-size: 0.9375rem;
+}
+
+.profile-table thead {
+    background: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.profile-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: bottom;
+}
+
+.profile-table td {
+    padding: 0.875rem 1rem;
+    color: #0f172a;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.profile-table tbody tr {
+    transition: background 0.1s ease;
+}
+
+.profile-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.profile-table tbody tr:nth-child(odd) {
+    background: rgba(248, 250, 252, 0.5);
+}
+
+.profile-table tbody tr:nth-child(odd):hover {
+    background: #f8fafc;
+}
+
+.profile-table a.profile-link {
+    color: #3b82f6;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.profile-table a.profile-link:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* Table vertical variant (standard table) */
+.table-vertical {
+    /* Uses default profile-table styles */
+}
+
+/* Table horizontal variant (label-value pairs) */
+.table-horizontal {
+    border: none;
+}
+
+.table-horizontal tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.table-horizontal tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-horizontal th {
+    width: 180px;
+    font-weight: 600;
+    color: #64748b;
+    background: transparent;
+    border-bottom: none;
+    padding: 0.75rem 1rem 0.75rem 0;
+}
+
+.table-horizontal td {
+    color: #0f172a;
+    font-weight: 500;
+    border-bottom: none;
+    padding: 0.75rem 0 0.75rem 1rem;
+}
+
+/* Summary table variant */
+.summary-table th {
+    width: 200px;
+    background: transparent;
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+    .profile-table {
+        font-size: 0.875rem;
+    }
+
+    .profile-table th,
+    .profile-table td {
+        padding: 0.625rem 0.75rem;
+    }
+}
+
+/* Empty state */
+.profile-empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
